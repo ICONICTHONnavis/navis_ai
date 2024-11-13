@@ -18,6 +18,4 @@ class user_tb(models.Model):
     class Meta:
         db_table = 'user_tb'
 
-
-
-# Create your models here.
+ # Create your models here.

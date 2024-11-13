@@ -18,7 +18,7 @@ def chat_answer(chattingQuestion, user_id):
         memory.save_context({"input": i["input"]},
                             {"outputs": i["outputs"]})
     system_message = SystemMessage(content=default_template)
-    human_message = HumanMessagePromptTemplate.from_template("current content: {history}, <question>:{input}")
+    human_message = HumanMessagePromptTemplate.from_template("current content: {history}, <question>: {input}")
     user_prompt = ChatPromptTemplate(messages=[system_message, human_message])
     conversation = ConversationChain(
         prompt=user_prompt,
