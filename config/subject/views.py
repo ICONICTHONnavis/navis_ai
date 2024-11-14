@@ -27,6 +27,7 @@ def recommend_subject(request):
             chat_serializer.save()
             return Response({
                 "responseDto": {
+                    "chattingQuestion": "나의 학점 정보를 기반으로 들을만한 전공 수업 추천해줘",
                     "chattingAnswer": rec,
                 },
                 "error": None,
