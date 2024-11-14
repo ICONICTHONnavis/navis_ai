@@ -3,4 +3,5 @@ from .views import create_chat
 
 urlpatterns = [
     path('question', create_chat, name='create_chat'),
+
 ]

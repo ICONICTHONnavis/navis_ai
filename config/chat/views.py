@@ -3,10 +3,9 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.response import Response
 from .serializers import chatSerializer, questionSerializer
-from .gpt.answer import chat_answer, get_history_tuple
+from .gpt.answer import chat_answer
 from user.models import user_tb
-
-# Create your views here.
+from subject.utils import gen_desc
 
 @api_view(['POST'])
 def create_chat(request):
@@ -16,7 +15,10 @@ def create_chat(request):
         chattingQuestion = serializer.data['chattingQuestion']
         try:
             user = user_tb.objects.get(student_number=studentNumber)
-            chattingAnswer = chat_answer(chattingQuestion, user.id)
+            if user.nl_description == None:
+                user.nl_description = gen_desc(user.id)
+                user.save()
+            chattingAnswer = chat_answer(chattingQuestion, user.id, user.nl_description)
             data = {
                 "answer": chattingAnswer,
                 "question": chattingQuestion,

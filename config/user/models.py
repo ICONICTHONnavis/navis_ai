@@ -14,6 +14,7 @@ class user_tb(models.Model):
     password = models.CharField(max_length=255)
     admission = models.CharField(max_length=255)
     student_name = models.CharField(max_length=255)
+    nl_description = models.TextField(blank=True)
 
     class Meta:
         db_table = 'user_tb'
