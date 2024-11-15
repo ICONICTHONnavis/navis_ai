@@ -6,7 +6,7 @@ from .models import complete_tb, subject_tb
 from .serializers import recommendSerializer
 from user.models import user_tb
 from chat.serializers import chatSerializer
-from .utils import gen_desc, subject_recommend
+from .utils import gen_desc, subject_recommend, multi_recommend
 
 @api_view(['POST'])
 def recommend_subject(request):
@@ -16,7 +16,8 @@ def recommend_subject(request):
         try:
             user = user_tb.objects.get(student_number=studentNumber)
             # desc = gen_desc(user.id)
-            rec = subject_recommend(user.nl_description)
+            # rec = subject_recommend(user.nl_description)
+            rec = multi_recommend(user.nl_description)
             data = {
                 "answer": rec,
                 "question": "나의 학점 정보를 기반으로 들을만한 전공 수업 추천해줘",
